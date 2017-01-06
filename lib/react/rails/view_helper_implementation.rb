@@ -39,8 +39,7 @@ module React
         # remove internally used properties so they aren't rendered to DOM
         html_options.except!(:tag, :prerender)
 
-        content_tag(:script, raw(props.is_a?(String) ? props : props.to_json), type: "text/json", "data-react-props-id" => html_options[:data][:react_props_id]) +
-            content_tag(html_tag, '', html_options, &block)
+        content_tag(html_tag, '', html_options, &block) + "\n" + content_tag(:script, raw(props.is_a?(String) ? props : props.to_json), type: "text/json", "data-react-props-id" => html_options[:data][:react_props_id])
       end
 
       private
